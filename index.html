@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이미지 넘기기</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+
+    img {
+      width: 300px;
+      height: 300px;
+      object-fit: contain;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>그림 보기</h2>
+
+  <img id="viewer" src="images/1.png" alt="그림" />
+
+  <div>
+    <button onclick="prevImage()">앞</button>
+    <button onclick="nextImage()">뒤</button>
+  </div>
+
+  <p id="pageText"></p>
+
+  <script>
+    const images = [
+      "images/1.png",
+      "images/2.png",
+      "images/3.png",
+      "images/4.png",
+      "images/5.png",
+      "images/6.png",
+      "images/7.png",
+      "images/8.png",
+      "images/9.png",
+      "images/10.png",
+      "images/11.png",
+      "images/12.png",
+      "images/13.png",
+      "images/14.png",
+      "images/15.png",
+      "images/16.png",
+      "images/17.png",
+      "images/18.png",
+      "images/19.png",
+      "images/20.png",
+      "images/21.png",
+      "images/22.png",
+      "images/23.png",
+      "images/24.png",
+      "images/25.png",
+      "images/26.png",
+      "images/27.png",
+      "images/28.png",
+      "images/29.png",
+      "images/30.png",
+      "images/31.png",
+      "images/32.png",
+      "images/33.png",
+      "images/34.png",
+      "images/35.png",
+      "images/36.png",
+      "images/37.png",
+      "images/38.png",
+      "images/39.png",
+      "images/40.png"
+    ];
+
+    let currentIndex = 0;
+
+    const viewer = document.getElementById("viewer");
+    const pageText = document.getElementById("pageText");
+
+    function showImage() {
+      viewer.src = images[currentIndex];
+      pageText.textContent = `${currentIndex + 1} / ${images.length}`;
+    }
+
+    function prevImage() {
+      currentIndex--;
+      if (currentIndex < 0) {
+        currentIndex = images.length - 1;
+      }
+      showImage();
+    }
+
+    function nextImage() {
+      currentIndex++;
+      if (currentIndex >= images.length) {
+        currentIndex = 0;
+      }
+      showImage();
+    }
+
+    showImage();
+  </script>
+</body>
+</html>
