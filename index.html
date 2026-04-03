@@ -3,92 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> 100점 만점에 100점 </title>
-<style>
-  body {
-    font-family: sans-serif;
-    text-align: center;
-    padding: 20px;
-  }
+  <title>이미지 넘기기</title>
 
-  img {
-    width: 80vw;
-    max-width: 900px;
-    height: 80vh;
-    max-height: 700px;
-    object-fit: contain;
-    border: 1px solid #ccc;
-    margin-bottom: 16px;
-  }
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #111;
+      color: white;
+      text-align: center;
+    }
 
-  button {
-    padding: 6px 12px;
-    margin: 0 6px;
-    font-size: 14px;
-    cursor: pointer;
-  }
+    h2 {
+      margin: 10px 0;
+      font-size: 18px;
+    }
 
-  #pageText {
-    margin-top: 10px;
-    font-size: 16px;
-  }
-</style>
+    .viewer-container {
+      height: 75vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+    }
+
+    button {
+      flex: 1;
+      margin: 5px;
+      padding: 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #333;
+      color: white;
+    }
+
+    button:active {
+      background: #555;
+    }
+
+    #pageText {
+      margin: 8px 0;
+      font-size: 14px;
+    }
+  </style>
 </head>
+
 <body>
-  <h2> 100점 만점에 100점 </h2>
 
-  <img id="viewer" src="images/1.png" alt="그림" />
+  <h2>그림 보기</h2>
 
-  <div>
-    <button onclick="prevImage()">앞</button>
-    <button onclick="nextImage()">뒤</button>
+  <div class="viewer-container">
+    <img id="viewer" src="images/1.png" />
   </div>
 
-  <p id="pageText"></p>
+  <div id="pageText"></div>
+
+  <div class="controls">
+    <button onclick="prevImage()">◀ 이전</button>
+    <button onclick="nextImage()">다음 ▶</button>
+  </div>
 
   <script>
-    const images = [
-      "images/1.png",
-      "images/2.png",
-      "images/3.png",
-      "images/4.png",
-      "images/5.png",
-      "images/6.png",
-      "images/7.png",
-      "images/8.png",
-      "images/9.png",
-      "images/10.png",
-      "images/11.png",
-      "images/12.png",
-      "images/13.png",
-      "images/14.png",
-      "images/15.png",
-      "images/16.png",
-      "images/17.png",
-      "images/18.png",
-      "images/19.png",
-      "images/20.png",
-      "images/21.png",
-      "images/22.png",
-      "images/23.png",
-      "images/24.png",
-      "images/25.png",
-      "images/26.png",
-      "images/27.png",
-      "images/28.png",
-      "images/29.png",
-      "images/30.png",
-      "images/31.png",
-      "images/32.png",
-      "images/33.png",
-      "images/34.png",
-      "images/35.png",
-      "images/36.png",
-      "images/37.png",
-      "images/38.png",
-      "images/39.png",
-      "images/40.png"
-    ];
+    const images = Array.from({length: 40}, (_, i) => `images/${i+1}.png`);
 
     let currentIndex = 0;
 
@@ -101,22 +89,17 @@
     }
 
     function prevImage() {
-      currentIndex--;
-      if (currentIndex < 0) {
-        currentIndex = images.length - 1;
-      }
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
       showImage();
     }
 
     function nextImage() {
-      currentIndex++;
-      if (currentIndex >= images.length) {
-        currentIndex = 0;
-      }
+      currentIndex = (currentIndex + 1) % images.length;
       showImage();
     }
 
     showImage();
   </script>
+
 </body>
 </html>
